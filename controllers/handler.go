@@ -41,21 +41,22 @@ func GetBook(c *gin.Context) {
 	BookQuery := c.Query("query")
 	BookStatus := c.Query("filter[status]")
 
+	var orderby []string
 	switch BookSort {
-	case "" : 
-		orderby := []int{"id asc"}
-	case "-title" :
-		orderby := []string{"title desc"}
-	case "title" :
-		orderby := []string("title asc")
-	case "-price" :
-		orderby := []int64("price desc")
-	case "price" :
-		orderby := []int64("price asc")
-	case "-status" :
-		orderby := []string("status desc")
-	case "status" :
-		orderby := []string("status asc")
+	case "":
+		orderby = []string{"id asc"}
+	case "-title":
+		orderby = []string{"title desc"}
+	case "title":
+		orderby = []string{"title asc"}
+	case "-price":
+		orderby = []string{"price desc"}
+	case "price":
+		orderby = []string{"price asc"}
+	case "-status":
+		orderby = []string{"status desc"}
+	case "status":
+		orderby = []string{"status asc"}
 	}
 
 	if ConvertInteger(BookNumber) && ConvertInteger(BookSize) { //validasi integer atau bukan
